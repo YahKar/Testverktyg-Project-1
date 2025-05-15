@@ -1,0 +1,8 @@
+.banner {
+  background-color: #4CAF50;  /* Green background */
+  color: white;               /* White text */
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
