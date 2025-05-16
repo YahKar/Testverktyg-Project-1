@@ -6,3 +6,61 @@
   font-size: 24px;
   font-weight: bold;
 }
+.back {
+  background-color: lightblue;
+
+}
+.styled-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.styled-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.styled-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.styled-form input,
+.styled-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.styled-form input:focus,
+.styled-form textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+.styled-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.styled-form button:hover {
+  background-color: #0056b3;
+}
