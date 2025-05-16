@@ -10,29 +10,20 @@
 </head>
 <body>
     <div class="banner"> Welcome to Our Project!</div> <!-- a division is created that uses class banner for its looks -->
-
-    <h2 style = "text-align: center;">Create User</h2>
-    <a href ="user.html" style="position: absolute; top: 50px; right: 50px; font-size: 20px;">Go to users</a>
-    <form class="styled-form" id ="createUser" style = "position: absolute; top: 100px; left: 50px;">
-        <label>Name:
-            <input type="text" name ="name" required />
-        </label><br><br>
-
-        <label>Nickname:
-            <input type ="text" name ="nickname" required />
-        </label><br><br>
-
-        <label> Age:
-            <input type ="number" name ="age" required />
-        </label><br><br>
-
-        <label>Bio:<br>
-           <textarea name ="bio" maxlength = "100" rows ="4" cols = "30" required></textarea> 
-        </label><br><br>
-
-        <button style ="font-family: 'Arial Black'; font-size: 20px;" type="submit">Save</button>
-
-    </form>
+    
+    
+    <a href ="user.html" style="position: absolute; top: 150px; right: 50px; font-size: 20px;">Go to users</a>
+    <div class="center-text">Create User </div>
+    <div class="form-position">  
+        <form class="styled-form" id ="createUser" >
+            <label> Name:</label> <input type="text" name ="name" required /></label><br><br>
+            <label>Nickname:</label><input type ="text" name ="nickname" required /> </label><br><br>
+            <label> Age</label><input type ="number" name ="age" required /></label><br><br>
+            <label>Bio:</label><br> <textarea name ="bio" maxlength = "100" rows ="4" cols = "30" required></textarea> </label><br><br>
+            <button style ="font-family: 'Arial Black'; font-size: 20px;" type="submit">Save</button>
+        </form>
+    </div>
     <br>
+
 </body>
 </html>
