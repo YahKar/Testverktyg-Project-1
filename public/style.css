@@ -48,6 +48,10 @@ input {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
+textarea {
+  width: 100%;
+
+}
 
 button {
   width: 100%;
