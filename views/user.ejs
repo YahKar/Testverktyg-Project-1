@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="/style.css">  <!-- Added / to fix css part-->
     <!-- link to css is added -->
 
 </head>
@@ -13,7 +13,11 @@
 
     <div class="banner"> Welcome to Our Project!</div> <!-- a division is created that uses class banner for its looks -->
     
-    <a href ="user.html" style="position: absolute; top: 50px; right: 50px; font-size: 20px;">Go to users</a>
+    <div>
+        <%= username %>
+    </div>
+
+    <a href ="index.ejs" style="position: absolute; top: 90px; right: 90px; font-size: 20px;">Go to users</a>
     <button style ="font-family: 'Arial Black'; font-size: 20px;" type="submit">Edit</button>
 </body>
 </html>

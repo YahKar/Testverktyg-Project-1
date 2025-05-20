@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="/style.css"> 
     <!-- link to css is added -->
 
 </head>
 <body>
     
     <div class="banner"> Welcome to Our Project!</div> <!-- a division is created that uses class banner for its looks -->
-
-    <a href="user.html"><h1>All Users</h1></a>
+   <ul>
+        <% users.forEach(function(user) { %>
+            <li>
+                Name: <%= user.Name %>, 
+                Nickname: <%= user.Nickname %>,
+                Age: <%= user.Age %>, 
+                Bio: <%= user.Bio %>
+            </li>
+        <% }); %>
+    </ul>
+    <a href="index.ejs"><h1>All Users</h1></a>
     <button style ="font-family: 'Arial Black'; font-size: 20px;" type="submit">Create new</button>
 </body>
 </html>
