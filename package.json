@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/YahKar/Testverktyg-Project-1/issues"
   },
-  "homepage": "https://github.com/YahKar/Testverktyg-Project-1#readme"
+  "homepage": "https://github.com/YahKar/Testverktyg-Project-1#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
 }
