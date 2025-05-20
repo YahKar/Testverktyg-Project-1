@@ -1,0 +1,29 @@
+{
+  "name": "testverktyg-project1",
+  "version": "1.0.0",
+  "description": "Users profile app with operations create, edit, update and delete on a server.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YahKar/Testverktyg-Project-1.git"
+  },
+  "keywords": [
+    "Learning",
+    "node",
+    "express",
+    "npm",
+    "html",
+    "MySQL",
+    "JavaScript"
+  ],
+  "author": "Chama, Hifza, Ratnasri, Shreelakshmi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YahKar/Testverktyg-Project-1/issues"
+  },
+  "homepage": "https://github.com/YahKar/Testverktyg-Project-1#readme"
+}
