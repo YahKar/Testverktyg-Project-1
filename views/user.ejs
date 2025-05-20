@@ -12,12 +12,22 @@
 <body>
 
     <div class="banner"> Welcome to Our Project!</div> <!-- a division is created that uses class banner for its looks -->
-    
-    <div>
-        <%= username %>
+    <br><br>
+    <div style="padding: 30px;">
+        <h2>@<%= user.Name %> 
+            <a href="/edit" style="display: inline-block; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 1px solid black; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; margin-left: 10px;"> <!-- When we click on edit we are directly redirected to edit.ejs-->
+                Edit
+            </a>
+        </h2>
+
+        <p><b>Nickname:</b> <%= user.Nickname %></p>
+        <p><b>Age:</b> <%= user.Age %></p>
+        <p><b>Bio:</b> <%= user.Bio %></p>
+ 
+      
     </div>
 
-    <a href ="index.ejs" style="position: absolute; top: 90px; right: 90px; font-size: 20px;">Go to users</a>
+    <a href ="/users" style="position: absolute; top: 150px; right: 150px; font-size: 20px;">Go to users</a>
     <button style ="font-family: 'Arial Black'; font-size: 20px;" type="submit">Edit</button>
 </body>
 </html>
