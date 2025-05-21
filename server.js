@@ -30,6 +30,11 @@ server.get("/users/:id", function (req, resp) {
     }
 });
 
+server.get("/create", function (req, resp) {
+    resp.render("create");
+});
+
+
 server.listen(port, function()  {
   console.log(`The server is listening ${port}`)
 })
