@@ -27,43 +27,30 @@ db.connect(function(err){
   console.log('Connected to MySQL database.');
 });
 
-// Example route
-//server.get('/users', function(req, res){
-  db.query('SELECT * FROM users', function(err, results){
-    if (err) {
-      return res.status(500).send('Error fetching data.');
-    }
-    res.json(results);
-  });
-});
 
-
-const users = [
-    { Name: "Ratnasri", Nickname: "Ratna", Age: 20, Bio: "Student as a software tester."},
-    { Name: "Hifza", Nickname: "Mamma", Age: 21, Bio: "Programmer" },
-    { Name: "Chama Hakkal", Nickname: "Chacho", Age: 22, Bio: "Tester" },
-    {Name: "Shreelakshmi", Nickname: "Shree", Age: 19, Bio: "Software Engineer"},
-]
-
-
-server.get('/users', (req, res) => {
+server.get('/users', function(req, res) {
   // Example with MySQL:
-  db.query('SELECT * FROM users', (err, results) => {
-    if (err) return res.status(500).send("Database error");
-    
-    res.render('index', { users: results }); // ⬅️ PASS users to EJS
+  db.query('SELECT * FROM users', function(err, results) {
+    if (err) 
+        return res.status(500).send("Database error");
+
+    res.render('index', { users: results }); // ⬅️ PASS users to index.ejs
   });
 });
 
 
 server.get("/users/:id", function (req, resp) {
     const id = req.params.id;
-    if(users[id]) {
-        resp.render("user", { user: users[id] });
-    } else {
-        resp.status(404).send("User not found");
-    }
+    db.query("SELECT * FROM users WHERE id = ?", [id], function(err, results) {
+        if (err) throw err;
+        if (results.length > 0) {
+            resp.render("user", { user: results[0] });
+        } else {
+            resp.status(404).send("user not found");
+        }
+    });
 });
+    
 
 server.get("/create", function (req, resp) {
     resp.render("create");
