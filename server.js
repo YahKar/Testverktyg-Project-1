@@ -1,15 +1,15 @@
-const express = require('express');
-const mysql = require('mysql2');
-const server = express();
+const express = require('express');// express setup
+const mysql = require('mysql2'); // my sql2 setup
+const server = express(); // server setup
 const path = require("path"); // Handle file path
-const port = 1500;
+const port = 1500; // port created
 
-const methodOverride = require('method-override');
-server.use(methodOverride('_method'));
-server.set('view engine', 'ejs');
-server.set('views', path.join(__dirname, 'views'));
+const methodOverride = require('method-override'); // setup a method for put,patch,delete, overwrite.
+server.use(methodOverride('_method')); // server use the method
+server.set('view engine', 'ejs'); // view folder as engine that reccognize ejs files in it.
+server.set('views', path.join(__dirname, 'views')); // 
 
-server.use(express.static(path.join(__dirname, 'public')))
+server.use(express.static(path.join(__dirname, 'public')))//
 
 // Create connection to MySQL
 const db = mysql.createConnection({
@@ -26,6 +26,7 @@ db.connect(function(err){
   console.log('Connected to MySQL database.');
 });
 
+<<<<<<< HEAD
 
 server.get('/users', function(req, res) {
   // Example with MySQL:
@@ -34,11 +35,20 @@ server.get('/users', function(req, res) {
         return res.status(500).send("Database error");
 
     res.render('index', { users: results }); // ⬅️ PASS users to index.ejs
+=======
+server.get('/users', function(req, res){
+  // Example with MySQL:
+  db.query('SELECT * FROM users', function(err, results){
+    if (err) return res.status(500).send("Database error");
+    
+    res.render('index', { users:results }); // ⬅️ PASS users to EJS
+>>>>>>> 08ceef12435a6817c7503f033c7353087e944047
   });
 });
 
 
 server.get("/users/:id", function (req, resp) {
+<<<<<<< HEAD
     const id = req.params.id;
     db.query("SELECT * FROM users WHERE id = ?", [id], function(err, results) {
         if (err) throw err;
@@ -46,6 +56,20 @@ server.get("/users/:id", function (req, resp) {
             resp.render("user", { user: results[0] });
         } else {
             resp.status(404).send("user not found");
+=======
+  const id = req.params.id;
+  db.query('SELECT * FROM users WHERE id = ?', [id], function (err, results) {
+        if (err) {
+            console.error('Database error:', err);
+            return resp.status(500).send("Server error");
+        }
+
+        if (results.length > 0) {
+            const user = results[0];
+            resp.render("user", { user });
+        } else {
+            resp.status(404).send("User not found");
+>>>>>>> 08ceef12435a6817c7503f033c7353087e944047
         }
     });
 });
@@ -70,9 +94,7 @@ server.get('/users/:id/edit', (req, res) => {
 });
 
 // Handle update
-const methodOverride = require('method-override');
-server.use(methodOverride('_method'));
-server.use(express.urlencoded({ extended: true }));
+
 
 server.put('/users/:id', (req, res) => {
   const { Name, Email } = req.body;
