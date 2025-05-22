@@ -32,7 +32,7 @@ server.get('/users', (req, res) => {
   db.query('SELECT * FROM users', (err, results) => {
     if (err) return res.status(500).send("Database error");
     
-    res.render('index', { users: results }); // ⬅️ PASS users to EJS
+    res.render('index', { users:results }); // ⬅️ PASS users to EJS
   });
 });
 
