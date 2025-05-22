@@ -27,25 +27,6 @@ db.connect(function(err){
   console.log('Connected to MySQL database.');
 });
 
-// Example route
-//server.get('/users', function(req, res){
-  db.query('SELECT * FROM users', function(err, results){
-    if (err) {
-      return res.status(500).send('Error fetching data.');
-    }
-    res.json(results);
-  });
-});
-
-
-const users = [
-    { Name: "Ratnasri", Nickname: "Ratna", Age: 20, Bio: "Student as a software tester."},
-    { Name: "Hifza", Nickname: "Mamma", Age: 21, Bio: "Programmer" },
-    { Name: "Chama Hakkal", Nickname: "Chacho", Age: 22, Bio: "Tester" },
-    {Name: "Shreelakshmi", Nickname: "Shree", Age: 19, Bio: "Software Engineer"},
-]
-
-
 server.get('/users', (req, res) => {
   // Example with MySQL:
   db.query('SELECT * FROM users', (err, results) => {
@@ -84,9 +65,7 @@ server.get('/users/:id/edit', (req, res) => {
 });
 
 // Handle update
-const methodOverride = require('method-override');
-server.use(methodOverride('_method'));
-server.use(express.urlencoded({ extended: true }));
+
 
 server.put('/users/:id', (req, res) => {
   const { Name, Email } = req.body;
