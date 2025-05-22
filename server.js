@@ -4,6 +4,8 @@ const server = express();
 const path = require("path"); // Handle file path
 const port = 1500;
 
+const methodOverride = require('method-override');
+server.use(methodOverride('_method'));
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, 'views'));
 
@@ -26,7 +28,7 @@ db.connect(function(err){
 });
 
 // Example route
-server.get('/', function(req, res){
+//server.get('/users', function(req, res){
   db.query('SELECT * FROM users', function(err, results){
     if (err) {
       return res.status(500).send('Error fetching data.');
@@ -44,8 +46,13 @@ const users = [
 ]
 
 
-server.get("/users", function (req, resp) {
-    resp.render("index", { user: users });
+server.get('/users', (req, res) => {
+  // Example with MySQL:
+  db.query('SELECT * FROM users', (err, results) => {
+    if (err) return res.status(500).send("Database error");
+    
+    res.render('index', { users: results }); // ⬅️ PASS users to EJS
+  });
 });
 
 
@@ -58,14 +65,39 @@ server.get("/users/:id", function (req, resp) {
     }
 });
 
-server.post("/create", function (req, resp) {
+server.get("/create", function (req, resp) {
     resp.render("create");
 });
 
-server.get("/edit/:id", function (req, resp) {
-    resp.render("user", { user: users[id] });
+server.get('/users/:id/edit', (req, res) => {
+  const userId = req.params.id;
+
+  const query = 'SELECT * FROM users WHERE id = ?';
+  db.query(query, [userId], (err, results) => {
+    if (err) return res.status(500).send("Database error");
+
+    if (results.length === 0) return res.status(404).send("User not found");
+
+    const user = results[0];
+    res.render('edit', { userId, user });
+  });
 });
 
+// Handle update
+const methodOverride = require('method-override');
+server.use(methodOverride('_method'));
+server.use(express.urlencoded({ extended: true }));
+
+server.put('/users/:id', (req, res) => {
+  const { Name, Email } = req.body;
+  const userId = req.params.id;
+
+  const query = 'UPDATE users SET Name = ?, Nickname = ?,Age=?,  Bio=? WHERE id = ?';
+  db.query(query, [Name, Nickname,Age, Bio, userId], (err, result) => {
+    if (err) return res.status(500).send("Update error");
+    res.redirect(`/users/${userId}`);  
+  });
+});
 
 
 server.listen(port, function()  {

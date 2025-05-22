@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
 
-    <link rel="stylesheet" href="/style.css">  <!-- Added / to fix css part-->
-    <!-- link to css is added -->
-
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-    <div class="banner"> Welcome to Our Project!</div> <!-- a division is created that uses class banner for its looks -->
-    <br><br>
-    
-    <div style="padding: 30px;">
-        <h2>@<%= user.Name %> 
-            <a href="/edit" style="display: inline-block; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px; margin-left: 10px;"> <!-- When we click on edit we are directly redirected to edit.ejs-->
-                Edit
-            </a>
-        </h2>
+  <!-- Banner -->
+  <div class="banner">Welcome to Our Project!</div>
+  <br><br>
 
-        <p><b>Nickname:</b> <%= user.Nickname %></p>
-        <p><b>Age:</b> <%= user.Age %></p>
-        <p><b>Bio:</b> <%= user.Bio %></p>
- 
-      
-    </div>
+  <!-- User Info -->
+  <div style="padding: 30px;">
+    <h2>
+      @<%= user.Name %>
+      <a href="/users/<%= userId %>/edit"
+         style="display: inline-block; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px; margin-left: 10px;">
+        Edit
+      </a>
+    </h2>
 
-    <a href ="/users" style="position: absolute; top: 150px; right: 150px; font-size: 20px;">Go to users</a>
-    <button style ="font-family: 'Arial Black'; font-size: 20px;" type="submit">Edit</button>
+    <p><strong>Nickname:</strong> <%= user.Nickname %></p>
+    <p><strong>Age:</strong> <%= user.Age %></p>
+    <p><strong>Bio:</strong> <%= user.Bio %></p>
+  </div>
+
+  <!-- Back to Users Link -->
+  <a href="/users"
+     style="position: absolute; top: 150px; right: 150px; font-size: 20px; text-decoration: none; color: blue;">
+    Go to users
+  </a>
+
 </body>
 </html>
