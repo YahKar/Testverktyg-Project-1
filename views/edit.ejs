@@ -16,14 +16,19 @@
     <div class="center-text">Edit User </div>
     <div class="form-position">  
         <form class="styled-form" action="/users/<%= userId %>?_method=PUT" method="POST">
-            <label> Name:</label> <input type="text" name ="name" value="<%= user.Name %>" required /></label><br><br>
-            <label>Nickname:</label><input type ="text" name ="nickname" value="<%= user.Nickname %>"required /> </label><br><br>
-            <label> Age</label><input type ="number" name ="age" value="<%= user.Age %>" required /></label><br><br>
-            <label>Bio:</label><br> <textarea name ="bio" maxlength = "100" rows ="4" cols = "30" value="<%= user.Bio %>"required></textarea> </label><br><br>
-            <a href="/users" style="margin-left: 20px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px;">
-            Update
-        </a>
-        <a href="/users/<%= userId %>">Cancel</a>
+           <input type="hidden" name="_method" value="PUT"><!-- This tells to the server to treat POST request as PUT request with the help of method-override-->
+            <label> Name:</label> <input type="text" name ="Name" value="<%= user.Name %>" required /></label><br><br>
+            <label>Nickname:</label><input type ="text" name ="Nickname" value="<%= user.Nickname %>"required /> </label><br><br>
+            <label> Age</label><input type ="number" name ="Age" value="<%= user.Age %>" required /></label><br><br>
+            <label>Bio:</label><br> <textarea name ="Bio" maxlength = "100" rows ="4" cols = "30" required><%= user.Bio %></textarea> </label><br><br>
+            <button type="submit" style="margin-left: 20px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px;">Update</button>
+             <a href="/users/<%= userId %>" style="margin-left: 20px;font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px" >Cancel</a>
+            <!--<a href="/users" style="margin-left: 20px;style="margin-left: 20px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px;">
+            
+                Update
+            
+        </a>-->
+       
            <!-- <button class="button-style" type="submit">Save</button>-->
         </form>
         

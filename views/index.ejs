@@ -21,9 +21,12 @@
             @<%= user.Name %>
           </a>
         </h2>
-        <a href="/edit" style="margin-left: 20px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px;">
+        <form action = "/users/<%= user.id %>?_method=DELETE" method= "POST" style="display:inline;">
+          <button type="submit" title="DELETE" onclick="return confirm('Are you sure that you want to delete this user?');">X</button>
+        </form>
+        <!--<a href="/delete" style="margin-left: 20px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px;">
             X
-        </a>
+        </a>-->
       </li>
     <% }); %>
   </ul>

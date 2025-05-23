@@ -15,15 +15,15 @@
     <a href ="/users" style="position: absolute; top: 150px; right: 50px; font-size: 20px;">Go to users</a>
     <div class="center-text">Create User </div>
     <div class="form-position">  
-        <form class="styled-form" id ="createUser" >
-            <label> Name:</label> <input type="text" name ="name" required /></label><br><br>
-            <label>Nickname:</label><input type ="text" name ="nickname" required /> </label><br><br>
-            <label> Age</label><input type ="number" name ="age" required /></label><br><br>
-            <label>Bio:</label><br> <textarea name ="bio" maxlength = "100" rows ="4" cols = "30" required></textarea> </label><br><br>
-            <a href="/users" style="margin-left: 20px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px;">
-            Save
-        </a>
-           <!-- <button class="button-style" type="submit">Save</button>-->
+        <form class="styled-form" id ="createUser" method = "POST" action ="/create">
+            <label> Name:</label> <input type="text" name ="Name" required /></label><br><br>
+            <label>Nickname:</label><input type ="text" name ="Nickname" required /> </label><br><br>
+            <label> Age</label><input type ="number" name ="Age" required /></label><br><br>
+            <label>Bio:</label><br> <textarea name ="Bio" maxlength = "100" rows ="4" cols = "30" required></textarea> </label><br><br>
+            <!--<a href="/users" style="margin-left: 20px; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px;">
+             Save
+        </a>-->
+           <button class="button-style" type="submit">Save</button>
         </form>
     </div>
     <br>
