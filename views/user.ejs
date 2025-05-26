@@ -9,18 +9,15 @@
 </head>
 <body>
 
-  <!-- Banner -->
-  <div class="banner">Welcome to Our Project!</div>
-  <br><br>
-
-  <!-- User Info -->
-  <div style="padding: 30px;">
+  <div style="width: 100%;height: 100%; position: fixed;">
+   <div style="width: 100%;height: 15%;" class="banner"> Welcome to Our Project!</div> <!-- a division is created that uses class banner for its looks -->
+   <!-- User Info -->
+  <div style="padding-left: 30px; overflow: auto; height: 85%; background-color: rgb(124, 159, 124);">
+     <div class="center-text"><a href ="/users" style="position: absolute; padding-left: 30%; font-size: 20px;">Go to users</a>
+     </div>
     <h2>
-      @<%= user.Name %>
-      <a href="/users/<%= user.id %>/edit"
-         style="display: inline-block; font-family: 'Arial Black'; font-size: 12px; padding: 4px 8px; border: 3px solid black; background-color: white; color: black; text-decoration: none; border-radius: 4px; margin-left: 10px;">
-        Edit
-      </a>
+      @<%= user.Name %>      
+       <button class="button-style-small" type="button" ><a href="/users/<%= user.id %>/edit" style=" text-decoration: none; color: white;" >Edit</a></button> 
     </h2>
 
     <p><strong>Nickname:</strong> <%= user.Nickname %></p>
@@ -28,11 +25,8 @@
     <p><strong>Bio:</strong> <%= user.Bio %></p>
   </div>
 
-  <!-- Back to Users Link -->
-  <a href="/users"
-     style="position: absolute; top: 150px; right: 150px; font-size: 20px; text-decoration: none; color: blue;">
-    Go to users
-  </a>
+ 
+  </div>
 
 </body>
 </html>

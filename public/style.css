@@ -13,15 +13,14 @@
 }
 .center-text {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
+  color: black;
 }
 .form-position {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  min-height: 60vh;
-  background-color: rgb(124, 159, 124);
+  justify-content: left;
+  align-items: left;
+  flex-grow: 1; 
 }
 
 .styled-form {
@@ -52,11 +51,35 @@ textarea {
   width: 100%;
 }
 
-button-style {
+.button-style-full {
   width: 100%;
   margin-top: 20px;
   padding: 12px;
-  background-color: #007bff;
+  background-color: green;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-style-half {
+  width: 45%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: green;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-style-small{
+  width: 5%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: green;
   border: none;
   color: white;
   font-size: 16px;
