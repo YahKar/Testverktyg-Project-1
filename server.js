@@ -77,7 +77,7 @@ server.get('/users/:id/edit', (req, res) => {
 
 
 server.put('/users/:id', (req, res) => {
-  const { Name, Email } = req.body;
+  const { Name,Age,Nickname,Bio } = req.body;
   const userId = req.params.id;
 
   const query = 'UPDATE users SET Name = ?, Nickname = ?,Age=?,  Bio=? WHERE id = ?';
@@ -87,6 +87,23 @@ server.put('/users/:id', (req, res) => {
   });
 });
 
+server.delete('/users/:id', function(req, res) {
+  const userId = req.params.id;
+  db.query('DELETE FROM users WHERE id = ?', [userId], function(err, results) {
+    if (err) {
+      console.error("Database error:", err);
+      return res.status(500).send('Delete error');
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).send("User not found");
+    }
+    res.redirect('/users');
+  });
+});
+
+server.get('/', (req, res) => {
+  res.send('Server is working!');
+});
 
 server.listen(port, function()  {
   console.log(`The server is listening ${port}`)
