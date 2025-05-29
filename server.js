@@ -127,6 +127,26 @@ server.put('/users/:id', function(req, res) {
   });
 });
 
+// Handle delete
+
+server.delete('/users/:id', function(req, res) {
+  const userId = req.params.id;
+
+  db.query('DELETE FROM users WHERE id = ?', [userId], function(err, result) {
+    if (err) {
+      console.error("Database error: ", err);
+      return res.status(500).send("Database error");
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send("User not found");
+    }
+
+    res.redirect('/users');
+  });
+});
+
+
 server.listen(port, function()  {
   console.log(`The server is listening ${port}`)
 })
