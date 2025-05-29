@@ -59,11 +59,11 @@ server.get("/create", function (req, resp) {
     resp.render("create");
 });
 
-server.get('/users/:id/edit', (req, res) => {
+server.get('/users/:id/edit', function(req, res) {
   const userId = req.params.id;
 
   const query = 'SELECT * FROM users WHERE id = ?';
-  db.query(query, [userId], (err, results) => {
+  db.query(query, [userId], function(err, results) {
     if (err) return res.status(500).send("Database error");
 
     if (results.length === 0) return res.status(404).send("User not found");
@@ -76,12 +76,12 @@ server.get('/users/:id/edit', (req, res) => {
 // Handle update
 
 
-server.put('/users/:id', (req, res) => {
+server.put('/users/:id', function(req, res) {
   const { Name,Age,Nickname,Bio } = req.body;
   const userId = req.params.id;
 
   const query = 'UPDATE users SET Name = ?, Nickname = ?,Age=?,  Bio=? WHERE id = ?';
-  db.query(query, [Name, Nickname,Age, Bio, userId], (err, result) => {
+  db.query(query, [Name, Nickname,Age, Bio, userId], function(err, result) {
     if (err) return res.status(500).send("Update error");
     res.redirect(`/users/${userId}`);  
   });
@@ -101,7 +101,7 @@ server.delete('/users/:id', function(req, res) {
   });
 });
 
-server.get('/', (req, res) => {
+server.get('/', function(req, res) {
   res.send('Server is working!');
 });
 
