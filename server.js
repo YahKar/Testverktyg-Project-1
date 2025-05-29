@@ -98,11 +98,11 @@ server.post("/create", function(req, res) {
 
 //edit method
 
-server.get('/users/:id/edit', (req, res) => {
+server.get('/users/:id/edit', function(req, res) {
   const userId = req.params.id;
 
   const query = 'SELECT * FROM users WHERE id = ?';
-  db.query(query, [userId], (err, results) => {
+  db.query(query, [userId], function(err, results) {
     if (err) return res.status(500).send("Database error");
 
     if (results.length === 0) return res.status(404).send("User not found");
