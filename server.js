@@ -1,41 +1,23 @@
-
-
 const express = require('express');// express setup
 const methodOverride = require('method-override');// setup a method for put,patch,delete, overwrite.
-const mysql = require('mysql2'); // my sql2 setup
-const server = express(); // server setup
 const path = require("path"); // Handle file path
-const port = 1500; // port created
+const db = require('./database');
+
+const server = express(); // server setup
 
 server.use(express.urlencoded({ extended: true }));
 server.use(methodOverride('_method')); // server use the method
 server.set('view engine', 'ejs'); // view folder as engine that reccognize ejs files in it.
 server.set('views', path.join(__dirname, 'views')); // 
-
 server.use(express.static(path.join(__dirname, 'public')))//
 
-// Create connection to MySQL
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'usersdb'
-});
-// Connect to DB
-db.connect(function(err){
-  if (err) {
-    console.error('Error connecting to MySQL:', err.message);
-    return;
-  }
-  console.log('Connected to MySQL database.');
-});
 
 server.get('/users', function(req, res){
   // Example with MySQL:
   db.query('SELECT * FROM users', function(err, results){
     if (err) return res.status(500).send("Database error");
     
-    res.render('index', { users:results }); // ⬅️ PASS users to EJS
+    res.render('index', { users:results }); // PASS users to EJS
   });
 });
 
@@ -63,7 +45,7 @@ server.get("/create", function (req, res) {
   res.render("create");
 });
     
-
+/*
 server.post("/create", function (req, resp) {
     const user = req.body;
 
@@ -78,17 +60,18 @@ server.post("/create", function (req, resp) {
 });
 
 });
-
+*/
 
 //post method
 
 server.post("/create", function(req, res) {
-  const user = req.body;
+  console.log('POST Body:', req.body)
+  const { Name, Nickname, Age, Bio } = req.body;
 
   const query = "INSERT INTO users (Name, Nickname, Age, Bio) VALUES (?, ?, ?, ?)";
-  db.query(query, [user.Name, user.Nickname, user.Age, user.Bio], function(err) {
+  db.query(query, [Name, Nickname, Age, Bio], function(err, result) {
     if (err) {
-      console.error("Insert error:", err);
+      console.error("Insert error (from test):", err);
       return res.status(500).send("Error saving user");
     }
     res.redirect("/users");
@@ -117,13 +100,17 @@ server.get('/users/:id/edit', function(req, res) {
 
 server.put('/users/:id', function(req, res) {
   const userId = req.params.id;
+  console.log('PUT Body:', req.body);
   const { Name, Nickname, Age, Bio } = req.body;
   
 
   const query = 'UPDATE users SET Name = ?, Nickname = ?, Age= ?, Bio= ? WHERE id = ?';
   db.query(query, [Name, Nickname, Age, Bio, userId], function(err, result) {
-    if (err) return res.status(500).send("Update error");
-    res.redirect(`/users/${userId}`);  
+    if (err) {
+      console.error('Update error (from test):', err);
+      return res.status(500).send("Update error");
+    } 
+    res.redirect(`/users/${userId}`); 
   });
 });
 
@@ -147,6 +134,4 @@ server.delete('/users/:id', function(req, res) {
 });
 
 
-server.listen(port, function()  {
-  console.log(`The server is listening ${port}`)
-})
+module.exports = server;
