@@ -118,6 +118,7 @@ server.put('/users/:id', function(req, res) {
 
 server.delete('/users/:id', function(req, res) {
   const userId = req.params.id;
+  console.log(`Deleting user with ID: ${req.params.id}`);
 
   db.query('DELETE FROM users WHERE id = ?', [userId], function(err, result) {
     if (err) {
