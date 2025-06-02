@@ -86,7 +86,7 @@ server.put('/users/:id', (req, res) => {
     res.redirect(`/users/${userId}`);  
   });
 });
-
+// delete request
 server.delete('/users/:id', function(req, res) {
   const userId = req.params.id;
   db.query('DELETE FROM users WHERE id = ?', [userId], function(err, results) {
