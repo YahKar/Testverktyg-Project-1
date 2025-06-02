@@ -53,4 +53,22 @@ describe('User routes with fake DB', function() {
         expect(res.statusCode).toBe(200);
         expect(res.text).toContain('Patrik')
     });
+
+    test('PUT /users/:id should update user', async function() { // simulates a PUT request using method override
+        mockQuery.mockImplementation(function(query, params, callback) {
+            callback(null, { affectedRows: 1 });
+        });
+        const res = await request(server)
+        .post('/users/1?_method=PUT')
+        .type('form')
+        .send({ // the data we want to update the user with
+            Name: 'Durga',
+            Nickname: 'Divya',
+            Age: 33,
+            Bio: 'Tester'
+        });
+        expect(res.statusCode).toBe(302);
+        expect(res.headers.location).toBe('/users/1');
+    });
+
 });
