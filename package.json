@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "test:e2e": "NODE_ENV=test npx playwright test tests/end2end.spec.js",
+    "test:e2e": "set NODE_ENV=test & npx playwright test tests/end2end.spec.js",
     "start": "nodemon app.js"
   },
   "repository": {
