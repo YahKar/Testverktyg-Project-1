@@ -53,4 +53,16 @@ describe('User routes with fake DB', function() {
         expect(res.statusCode).toBe(200);
         expect(res.text).toContain('Patrik')
     });
+
+    test('DELETE /users/:id should delete a user', async function () {
+        
+        mockQuery.mockImplementation(function (query, params, callback) {
+            callback(null, { affectedRows: 1 }); // Simulates successful deletion
+            });
+
+    const res = await request(server).delete('/users/1'); // Simulate deleting user with ID 1
+
+    expect(res.statusCode).toBe(302); // Assuming your app redirects after deletion
+    expect(res.headers.location).toBe('/users'); // Should redirect to user list
+});
 });
