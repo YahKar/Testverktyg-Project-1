@@ -26,4 +26,31 @@ describe('User routes with fake DB', function() {
         expect(res.statusCode).toBe(200);
         expect(res.text).toContain('Patrik');
     });
+
+    test('POST /create should insert a user', async function() {
+        mockQuery.mockImplementation(function(query, params, callback) {
+            callback(null, { affectedRows: 1 });// AffectedRows:1 means one row(user) was inserted (added)
+        });
+        const res = await request(server)
+            .post('/create') // This sends a POST /create request with form data not json
+            .type('form') // Tells supertest to send the request body as url-encoded form data not json
+            .send({
+                Name: 'Abdo',
+                Nickname: 'Abdel',
+                Age: 38,
+                Bio: 'CAD',
+            });
+        expect(res.statusCode).toBe(302); // 302= standard HTTP status for redirection
+        expect(res.headers.location).toBe('/users'); // confirms that the redirect went to the correct location /users
+    });
+    test('GET /users/:id should return single user', async function() { // simulates returning one user for /users/1
+        mockQuery.mockImplementation(function(query, params, callback) {
+            callback(null, [
+                { id: params[0], Name: "Patrik", Nickname: "Pat", Age: 33, Bio: "Teacher" }
+            ]);
+        });
+        const res = await request(server).get('/users/1');
+        expect(res.statusCode).toBe(200);
+        expect(res.text).toContain('Patrik')
+    });
 });
