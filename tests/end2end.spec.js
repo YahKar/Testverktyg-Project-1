@@ -79,23 +79,17 @@ test.describe('Test User', () => {
             page.waitForURL('**/users'),
             page.click('button[type="submit"]')
         ]);
-
         await expect(page.locator('body')).toContainText('@Patrik');
 
-        const userLi = page.locator('li').filter({ hasText: '@Patrik' }).first();
-        const deleteButton = userLi.locator('form button[type="submit"]');
+        // 2. Confirm user appears
+        const userLi = page.locator('li', { hasText: '@Patrik' }).first();
+        await expect(userLi).toBeVisible();
 
-        // ✅ Click delete and wait for response instead of navigation
+        // 3. Delete the user
         await Promise.all([
-            page.waitForResponse(response =>
-                response.url().includes('/users') && response.status() === 302
-        ),
-        deleteButton.click()
-    ]);
-
-       
-        // Confirm the user is no longer present
-        await page.reload(); // Reload after deletion
+            page.waitForNavigation({ url: '**/users' }), // Wait for redirect
+            userLi.locator('form button[type="submit"]').click(),
+        ]);
 
             // 5. Make sure the user is really gone
         await expect(page.locator('body')).not.toContainText('@Patrik');
