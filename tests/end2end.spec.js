@@ -4,12 +4,12 @@ const { test, expect } = require('@playwright/test');
 const { clearTestUsers } = require('./test-setup');
 require('dotenv').config({ path: '.env.test' });
 
-const server = require('../server');
+/* const server = require('../server');
 const port = 1500;
 
 server.listen(port, function() {
    console.log(`Server is running at http://localhost:${port}`);
-});
+});*/
 
 // To clear up before each test
 test.beforeEach(async () => {
@@ -45,10 +45,18 @@ test.describe('Test User', () => {
         await page.waitForURL('**/users');        
       
         await expect(page.locator('body')).toContainText('@Durga');
-        await page.locator("text= @Durga").click();  
-        await page.waitForURL('**/users/**');           
-        await page.locator("text= Edit").click();
-        await page.waitForURL('**/edit'); 
+        await page.locator("text=@Durga").first().click();  
+        await page.waitForURL('**/users/**');     
+
+        // await page.locator("text= Edit").click();
+        // await page.waitForURL('**/edit'); 
+
+        // Click Edit and wait for edit page
+        await Promise.all([
+            page.waitForURL('**/edit'),
+            page.locator('text= Edit').click()
+        ]);
+
         await page.waitForSelector('input[name="Name"]')
         await page.fill('input[name="Name"]', 'Chama Hakkal');
         await page.fill('input[name="Nickname"]', 'Chachou');
@@ -84,13 +92,15 @@ test.describe('Test User', () => {
 
         // Submit the form and wait for the users page to load                       
         const deleteButton = userLi.locator('form button[type="submit"]');        
-        deleteButton.click();
+        await deleteButton.click();
 
        //Make sure the user is really gone
         await page.reload();
         await expect(page.locator('body')).not.toContainText('@Patrik');
     });
 
+
+    // Display user details 
     test('Should display user details', async ({ page }) => {
         await page.goto('http://localhost:1500/create');
         await page.waitForSelector('input[name="Name"]');
@@ -102,9 +112,9 @@ test.describe('Test User', () => {
         await page.click('button[type="submit"]');
         await page.waitForURL('**/users');              
         await expect(page.locator('body')).toContainText('@Lakshmi');      
-        page.locator("text = @Lakshmi").click();
+        await page.locator("text=@Lakshmi").first().click();
         await page.waitForURL('**/users/**'); 
-        await expect(page.locator('body')).toContainText('Sri');
+        await expect(page.locator('body')).toContainText('Tester with playwright exp');
     });
 
 });
