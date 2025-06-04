@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS usersdb_test;
+USE usersdb_test;
+
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    Name VARCHAR(255) NOT NULL,
+    Nickname VARCHAR(255) NOT NULL,
+    Age INT NOT NULL,
+    Bio VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);

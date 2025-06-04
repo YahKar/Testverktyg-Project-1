@@ -2,7 +2,9 @@ const express = require('express');// express setup
 const methodOverride = require('method-override');// setup a method for put,patch,delete, overwrite.
 const path = require("path"); // Handle file path
 const db = require('./database');
+
 const server = express(); // server setup
+
 server.use(express.urlencoded({ extended: true }));
 server.use(methodOverride('_method')); // server use the method
 server.set('view engine', 'ejs'); // view folder as engine that reccognize ejs files in it.
@@ -101,4 +103,5 @@ server.delete('/users/:id', function(req, res) {
     res.redirect('/users');
   });
 });
+
 module.exports = server;

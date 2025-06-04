@@ -2,6 +2,8 @@ const mysql = require('mysql2');
 require('dotenv').config({
   path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
 })
+
+
 /*
 // Check if we are in test mode
 const dbName = process.env.NODE_ENV === 'test' ? 'usersdb_test' : 'usersdb';
@@ -19,5 +21,7 @@ db.connect(function(err){
   }else {
      console.log(`Connected to MySQL database: ${process.env.DB_NAME}`);
   }
+ 
 });
+
 module.exports = db;
