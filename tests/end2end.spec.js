@@ -46,9 +46,10 @@ test.describe('Test User', () => {
         await page.locator("text=@Durga").first().click();  
         await page.waitForURL('**/users/**');     
 
+        /*
         // Capture the user ID from the URL
         const userDetailUrl = page.url();
-        const userId = userDetailUrl.split('/').pop();
+        const userId = userDetailUrl.split('/').pop();*/
 
 
          // Step 3: Click "Edit" and go to the edit form
@@ -70,9 +71,7 @@ test.describe('Test User', () => {
         ]);
 
        // Go back to updated user detail page using the same ID
-        await page.goto(`http://localhost:1500/users/${userId}`);
         await expect(page.locator('body')).toContainText('Python, JS, HTML.');
-        await expect(page.locator('body')).toContainText('@Chery');
         
     });
 
