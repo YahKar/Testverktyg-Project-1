@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="/style.css"> 
+    <!-- link to css is added -->
+</head>
+<body>
+    <div style="width: 100%;height: 100%; position: fixed;">
+   <div style="width: 100%;height: 15%;" class="banner"> Welcome to Our Project!</div> <!-- a division is created that uses class banner for its looks -->
+    
+   <div style="padding-left: 30px; overflow: auto; height: 85%; background-color: rgb(124, 159, 124);">   
+    <div class="center-text">Edit User 
+     <a href ="/users" style="position: absolute; padding-left: 30%; font-size: 20px;">Go to users</a>
+     </div>
+    <div class="form-position">  
+        <form  action="/users/<%= userId %>?_method=PUT" method="POST">
+           <input type="hidden" name="_method" value="PUT"><!-- This tells to the server to treat POST request as PUT request with the help of method-override-->
+            <label> Name:</label> <input type="text" name ="Name" value="<%= user.Name %>" required /></label><br>
+            <label>Nickname:</label><input type ="text" name ="Nickname" value="<%= user.Nickname %>"required /> </label><br>
+            <label> Age</label><input type ="number" name ="Age" value="<%= user.Age %>" required /></label><br>
+            <label>Bio:</label> <textarea name ="Bio" maxlength = "100" rows ="4" cols = "30" required><%= user.Bio %></textarea> </label><br>
+         
+            <button class="button-style-half"  type="submit" >Update</button>
+            <button class="button-style-half" type="button" ><a href="/users/<%= userId %>" style=" text-decoration: none; color: white;" >Cancel</a></button> 
+       
+        </form>
+        
+    </div>
+   </div>
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "testverktyg-project1",
+  "version": "1.0.0",
+  "description": "Users profile app with operations create, edit, update and delete on a server.",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "test:e2e": "set NODE_ENV=test & npx playwright test tests/end2end.spec.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YahKar/Testverktyg-Project-1.git"
+  },
+  "keywords": [
+    "Learning",
+    "node",
+    "express",
+    "npm",
+    "html",
+    "MySQL",
+    "JavaScript"
+  ],
+  "author": "Chama, Hifza, Ratnasri, Shreelakshmi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YahKar/Testverktyg-Project-1/issues"
+  },
+  "homepage": "https://github.com/YahKar/Testverktyg-Project-1#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mysql2": "^3.14.1",
+    "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.27",
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1"
+  }
+}
