@@ -4,12 +4,6 @@ const { test, expect } = require('@playwright/test');
 const { clearTestUsers } = require('./test-setup');
 require('dotenv').config({ path: '.env.test' });
 
-/* const server = require('../server');
-const port = 1500;
-
-server.listen(port, function() {
-   console.log(`Server is running at http://localhost:${port}`);
-});*/
 
 // To clear up before each test
 test.beforeEach(async () => {
@@ -35,37 +29,51 @@ test.describe('Test User', () => {
     // Edit a user
     test('Should edit an existing user', async ({ page }) => {
         await page.goto('http://localhost:1500/create');
+
         await page.waitForSelector('input[name="Name"]');
         await page.fill('input[name="Name"]', 'Durga');
         await page.fill('input[name="Nickname"]', 'Divya');
         await page.fill('input[name="Age"]', '32');
         await page.fill('textarea[name="Bio"]', 'Tester');
-
-        await page.click('button[type="submit"]');
-        await page.waitForURL('**/users');        
+        
+        await Promise.all([
+            page.click('button[type="submit"]'),
+            page.waitForNavigation()
+        ]);
       
         await expect(page.locator('body')).toContainText('@Durga');
+
         await page.locator("text=@Durga").first().click();  
         await page.waitForURL('**/users/**');     
 
-        // await page.locator("text= Edit").click();
-        // await page.waitForURL('**/edit'); 
+        // Capture the user ID from the URL
+        const userDetailUrl = page.url();
+        const userId = userDetailUrl.split('/').pop();
 
-        // Click Edit and wait for edit page
-        await Promise.all([
-            page.waitForURL('**/edit'),
-            page.locator('text= Edit').click()
-        ]);
+
+         // Step 3: Click "Edit" and go to the edit form
+        await page.waitForSelector('text=Edit');
+        await page.locator('text=Edit').click();
+        await page.waitForURL('**/edit');
 
         await page.waitForSelector('input[name="Name"]')
-        await page.fill('input[name="Name"]', 'Chama Hakkal');
-        await page.fill('input[name="Nickname"]', 'Chachou');
-        await page.fill('input[name="Age"]', '34');
+        await page.fill('input[name="Name"]', 'Chery ');
+        await page.fill('input[name="Nickname"]', 'Cha');
+        await page.fill('input[name="Age"]', '30');
         await page.fill('textarea[name="Bio"]', 'Python, JS, HTML.');
 
-        await page.click('button[type="submit"]');
-        await page.waitForURL('**/users/**');   
+
+        // 5. Submit the edit form
+        await Promise.all([
+            page.click('button[type="submit"]'),
+            page.waitForNavigation()
+        ]);
+
+       // Go back to updated user detail page using the same ID
+        await page.goto(`http://localhost:1500/users/${userId}`);
         await expect(page.locator('body')).toContainText('Python, JS, HTML.');
+        await expect(page.locator('body')).toContainText('@Chery');
+        
     });
 
       // Delete a user
@@ -110,11 +118,12 @@ test.describe('Test User', () => {
         await page.fill('textarea[name="Bio"]', 'Tester with playwright exp');
 
         await page.click('button[type="submit"]');
-        await page.waitForURL('**/users');              
+        await page.waitForURL('**/users');  
+
         await expect(page.locator('body')).toContainText('@Lakshmi');      
         await page.locator("text=@Lakshmi").first().click();
         await page.waitForURL('**/users/**'); 
         await expect(page.locator('body')).toContainText('Tester with playwright exp');
     });
-
+    
 });
